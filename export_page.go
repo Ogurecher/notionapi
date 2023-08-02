@@ -83,6 +83,20 @@ func (c *Client) RequestPageExportURL(id string, exportType string, recursive bo
 		},
 	}
 
+	req.Body := &exportPageTaskRequest{
+		Task: &exportPageTask{
+			EventName: eventExportBlock,
+			Request: &exportPageRequest{
+				BlockID:   id,
+				Recursive: recursive,
+				ExportOptions: &exportPageOptions{
+					ExportType: exportType,
+					TimeZone:   defaultExportTimeZone,
+				},
+			},
+		},
+	}
+
 	var rsp enqueueTaskResponse
 	var err error
 	apiURL := "/api/v3/enqueueTask"
