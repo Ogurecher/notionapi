@@ -108,7 +108,8 @@ repeatRequest:
 	req.Header.Set("User-Agent", userAgent)
 	req.Header.Set("Accept-Language", acceptLang)
 	if c.AuthToken != "" {
-		req.Header.Set("cookie", fmt.Sprintf("token_v2=%v;file_token=%v", c.AuthToken, c.FileToken))
+		req.Header.Set("cookie", fmt.Sprintf("token_v2=%v", c.AuthToken))
+		req.Header.Add("cookie", fmt.Sprintf("file_token=%v", c.FileToken))
 	}
 	var rsp *http.Response
 
