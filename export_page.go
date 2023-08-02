@@ -69,37 +69,7 @@ func (c *Client) RequestPageExportURL(id string, exportType string, recursive bo
 		return "", fmt.Errorf("'%s' is not a valid notion id", id)
 	}
 
-	req := {
-      task: {
-        eventName: "exportBlock",
-        request: {
-          block: { id },
-          recursive: true,
-          exportOptions: {
-            exportType: "markdown",
-            timeZone: "Europe/Zurich",
-            locale: "en",
-            collectionViewExportType: "all",
-          },
-        },
-      },
-    }
-
-	req.Body := {
-      task: {
-        eventName: "exportBlock",
-        request: {
-          block: { id },
-          recursive: true,
-          exportOptions: {
-            exportType: "markdown",
-            timeZone: "Europe/Zurich",
-            locale: "en",
-            collectionViewExportType: "all",
-          },
-        },
-      },
-    }
+	req := fmt.Sprintf("{\"task\": {\"eventName\": \"exportBlock\",\"request\": {\"block\": \"%v\",\"recursive\": true,\"exportOptions\": {\"exportType\": \"markdown\",\"timeZone\": \"Europe/Zurich\",\"locale\": \"en\",\"collectionViewExportType\": \"all\"}}}}", id)
 
 	var rsp enqueueTaskResponse
 	var err error
