@@ -81,25 +81,25 @@ func (c *Client) RequestPageExportURL(id string, exportType string, recursive bo
 
 	var exportURL string
 	taskID := rsp.TaskID
-	for {
-		time.Sleep(250 * time.Millisecond)
-		req := getTasksRequest{
-			TaskIDS: []string{taskID},
-		}
-		var err error
-		var rsp getTasksExportPageResponse
-		apiURL = "/api/v3/getTasks"
-		err = c.doNotionAPI(apiURL, req, &rsp, nil)
-		if err != nil {
-			return "", err
-		}
-		status := rsp.Results[0].Status
-		if status != nil && status.Type == statusComplete {
-			exportURL = status.ExportURL
-			break
-		}
-		time.Sleep(750 * time.Millisecond)
-	}
+	// for {
+	// 	time.Sleep(250 * time.Millisecond)
+	// 	req := getTasksRequest{
+	// 		TaskIDS: []string{taskID},
+	// 	}
+	// 	var err error
+	// 	var rsp getTasksExportPageResponse
+	// 	apiURL = "/api/v3/getTasks"
+	// 	err = c.doNotionAPI(apiURL, req, &rsp, nil)
+	// 	if err != nil {
+	// 		return "", err
+	// 	}
+	// 	status := rsp.Results[0].Status
+	// 	if status != nil && status.Type == statusComplete {
+	// 		exportURL = status.ExportURL
+	// 		break
+	// 	}
+	// 	time.Sleep(750 * time.Millisecond)
+	// }
 
 	return exportURL, nil
 }
