@@ -22,6 +22,8 @@ const (
 type Client struct {
 	// AuthToken allows accessing non-public pages.
 	AuthToken string
+
+	FileToken string
 	// HTTPClient allows over-riding http.Client
 	HTTPClient *http.Client
 	// Logger is used to log requests and responses for debugging.
@@ -107,6 +109,7 @@ repeatRequest:
 	req.Header.Set("Accept-Language", acceptLang)
 	if c.AuthToken != "" {
 		req.Header.Set("cookie", fmt.Sprintf("token_v2=%v", c.AuthToken))
+		req.Header.Set("cookie", fmt.Sprintf("file_token=%v", c.FileToken))
 	}
 	var rsp *http.Response
 
