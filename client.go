@@ -112,6 +112,8 @@ repeatRequest:
 	}
 	var rsp *http.Response
 
+	c.logf("%v;\n%v;\n%v;\n%v", uri, req.Header, c.AuthToken, c.FileToken)
+	
 	httpClient := c.getHTTPClient()
 	rsp, err = httpClient.Do(req)
 
