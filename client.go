@@ -137,8 +137,8 @@ repeatRequest:
 	if rsp.StatusCode != 200 {
 		d, _ := ioutil.ReadAll(rsp.Body)
 		c.logf("Error: status code %s\nBody:\n%s\n", rsp.Status, PrettyPrintJS(d))
-		// return nil, fmt.Errorf("http.Post('%s') returned non-200 status code of %d", uri, rsp.StatusCode)
-		return nil, fmt.Errorf("%v;\n%v;\n%v;\n%v", uri, req.Header, c.AuthToken, c.FileToken)
+		return nil, fmt.Errorf("http.Post('%s') returned non-200 status code of %d", uri, rsp.StatusCode)
+		// return nil, fmt.Errorf("%v;\n%v;\n%v;\n%v", uri, req.Header, c.AuthToken, c.FileToken)
 	}
 	d, err := ioutil.ReadAll(rsp.Body)
 	if err != nil {
